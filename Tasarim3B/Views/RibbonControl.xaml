@@ -1,0 +1,127 @@
+﻿<UserControl x:Class="Tasarim3B.Views.RibbonControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Tasarim3B.Views"
+             xmlns:fln="urn:fluent-ribbon" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behaviors="clr-namespace:Tasarim3B.Behaviors"
+             xmlns:properties="clr-namespace:Tasarim3B.Properties"
+             xmlns:converter="clr-namespace:Tasarim3B.Converters"
+             xmlns:model="clr-namespace:Tasarim3B.Models"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converter:EnumToBooleanConverter x:Key="EnumToBooleanConverter" EnumType="model:AppTheme" />
+    </UserControl.Resources>
+    
+    <Grid>
+        <fln:Ribbon x:Name="FluentRibbon" Grid.Row="1"  FontSize="13" Background="LightGreen"  >
+            <!--Backstage-->
+            <fln:Ribbon.Menu>
+                <fln:Backstage UseHighestAvailableAdornerLayer="False">
+                    <fln:BackstageTabControl x:Name="backstageTabControl" >
+                       
+                        <i:Interaction.Behaviors>
+                            <behaviors:BackstageTabNavigationBehavior x:Name="navigationBehavior" />
+                        </i:Interaction.Behaviors>
+                        <fln:BackstageTabItem
+                             Tag="Tasarim3B.ViewModels.SettingsViewModel"
+                             Header="Tasarım3B - Dolap Tasarım - " />
+                    </fln:BackstageTabControl>
+                </fln:Backstage>
+            </fln:Ribbon.Menu>
+
+            <i:Interaction.Behaviors>
+                <behaviors:RibbonTabsBehavior x:Name="tabsBehavior" />
+            </i:Interaction.Behaviors>
+
+           <fln:RibbonTabItem 
+                   fln:KeyTip="A"
+                   behaviors:RibbonTabsBehavior.IsHomeTab="True"
+                   Header="{x:Static properties:Resources.RibbonTab1Baslik}">
+                <fln:RibbonGroupBox
+                       State="Large"
+                       MinWidth="150"
+                       Header="{x:Static properties:Resources.ShellPageRibbonHomeGroupCommon1Header}">
+                    <fln:Button Header="Yeni" Height="Auto"
+                         Icon="/Tasarim3B;component/Resimler/Yeni_Doc_16x16.png"  
+                         LargeIcon="/Tasarim3B;component/Resimler/Yeni_Doc_32x32.png"
+                         Command="{Binding YeniCizimEkleCommand}"/>
+                    <fln:Button Header="Aç" 
+                         Icon="/Tasarim3B;component/Resimler/Ac_16x16.png"  
+                         LargeIcon="/Tasarim3B;component/Resimler/Ac_32x32.png"
+                         Command="{Binding YeniCizimEkleCommand}"/>
+                    <fln:GroupSeparatorMenuItem HorizontalAlignment="Center" Width="3" Height="80"/>
+                    <fln:Button Header="Kaydet" 
+                              Icon="/Tasarim3B;component/Resimler/Kaydet_16x16.png"  
+                              LargeIcon="/Tasarim3B;component/Resimler/Kaydet_16x16.png"/>
+                    <fln:Button Header="Farklı Kaydet" SizeDefinition="Large"
+                               Icon="/Tasarim3B;component/Resimler/FarkliKaydet_16x16.png"  
+                               LargeIcon="/Tasarim3B;component/Resimler/FarkliKaydet.png" Height="75"/>
+                    <fln:Button Header="Tümünü Kaydet" SizeDefinition="Large"  
+                            Icon="/Tasarim3B;component/Resimler/TumKaydet_16x16.png" Height="75"
+                            LargeIcon="/Tasarim3B;component/Resimler/TumunuKaydet.png" ToolTip="Tümünü Kaydet"/>
+                </fln:RibbonGroupBox>
+                <fln:RibbonGroupBox State="Middle"
+                        MinWidth="50"
+                        Header="{x:Static properties:Resources.RibbonTabGrup2}">
+                    <fln:Button Header="Firma Bilgisi" SizeDefinition="Large" 
+                           Icon="/Tasarim3B;component/Resimler/Firma.png"  Height="75"
+                           LargeIcon="/Tasarim3B;component/Resimler/Firma.png"
+                           Command="{Binding FirmaEkleCommand}"/>
+                </fln:RibbonGroupBox>
+                <fln:RibbonGroupBox
+                       State="Middle"
+                       MinWidth="50"
+                       Header="{x:Static properties:Resources.RibbonTabGrup3}">
+                    <fln:Button Header="Levha Ekle/Sil" HorizontalAlignment="Center"
+                          Icon="/Tasarim3B;component/Resimler/Cerise.png"  Height="75"
+                          LargeIcon="/Tasarim3B;component/Resimler/Cerise.png"
+                          Command="{Binding LevhaEkleSilCommand}"/>
+                </fln:RibbonGroupBox>
+                <fln:RibbonGroupBox   State="Middle"
+                         MinWidth="100"
+                         Header="{x:Static properties:Resources.TabYanPencereGoster}">
+                    <fln:CheckBox Header="Firmalar - Levha Çeşitleri" 
+                          IsChecked="{Binding FirmalarGoster, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          HorizontalAlignment="Left"
+                          IsEnabled="{Binding ActiveDocumentCizim, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <fln:CheckBox Header="3B Nesne Özellikleri" 
+                         IsChecked="{Binding OzelliklerGoster, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left"
+                         IsEnabled="{Binding ActiveDocumentCizim, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </fln:RibbonGroupBox>
+                <!--<fln:RibbonGroupBox   State="Middle"
+                         MinWidth="100"
+                         Header="{x:Static properties:Resources.TabGrupTema}">
+                    <RadioButton
+                                 GroupName="AppTheme"
+                                 Content="{x:Static properties:Resources.TabGroupTemaAcik}"
+                                 FontSize="{StaticResource MediumFontSize}"
+                                 IsChecked="{Binding Theme, Mode=OneWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SetThemeCommand}" CommandParameter="Light" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </RadioButton>
+                    <RadioButton
+                          GroupName="AppTheme"
+                          Content="{x:Static properties:Resources.TabGroupTemaKoyu}"
+                          Margin="{StaticResource XSmallTopMargin}"
+                          FontSize="{StaticResource MediumFontSize}"
+                          IsChecked="{Binding Theme, Mode=OneWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding SetThemeCommand}" CommandParameter="Dark" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </RadioButton>
+                </fln:RibbonGroupBox>-->
+            </fln:RibbonTabItem>
+        </fln:Ribbon>
+
+    </Grid>
+</UserControl>

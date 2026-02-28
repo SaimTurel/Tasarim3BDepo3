@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/Destek/" />
+  <Folder Name="/Destek/Kaynak/" />
+  <Folder Name="/Hizmet/" />
+  <Folder Name="/Ortak/">
+    <Project Path="Tasarim3B.Ortak/Tasarim3B.Ortak.csproj" Id="0b551bea-e87d-4c11-a9a9-349cc9108a1b" />
+  </Folder>
+  <Folder Name="/Ortam/" />
+  <Folder Name="/Ortam/WinUI/" />
+  <Folder Name="/Ortam/WPF/">
+    <Project Path="Tasarim3B.Core/Tasarim3B.Core.csproj" />
+    <Project Path="Tasarim3B/Tasarim3B.csproj" />
+  </Folder>
+  <Folder Name="/Ortam/WPF/Araclar/" />
+  <Folder Name="/Ortam/WPF/Cizim/" />
+  <Folder Name="/Veri/" />
+  <Folder Name="/Veri/WPF/">
+    <Project Path="Tasarim3B.Veri.Erisim/Tasarim3B.Veri.Erisim.csproj" Id="37f268ac-accc-473b-9d05-f29086fc4b43" />
+    <Project Path="Tasarim3B.Veri.Islem/Tasarim3B.Veri.Islem.csproj" Id="5cb64f95-9ae9-4055-9bb3-cd33c2ced17c" />
+    <Project Path="Tasarim3B.Veri.Varliklar/Tasarim3B.Veri.Varliklar.csproj" Id="13ba6126-246a-4d5a-bedb-ff4854fa89a1" />
+  </Folder>
+</Solution>
